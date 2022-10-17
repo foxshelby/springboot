@@ -38,6 +38,8 @@ public class RedisConfig {
         //设置hash的value的序列化方式
         redisTemplate.setHashValueSerializer(RedisSerializer.json());
 
+        //开启redis的事务支持
+        redisTemplate.setEnableTransactionSupport(true);
         redisTemplate.afterPropertiesSet();//使上面参数生效
         return redisTemplate;
     }
