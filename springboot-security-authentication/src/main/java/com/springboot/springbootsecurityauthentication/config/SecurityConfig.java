@@ -1,5 +1,7 @@
 package com.springboot.springbootsecurityauthentication.config;
 
+import com.springboot.springbootsecurityauthentication.handler.FailureHandler;
+import com.springboot.springbootsecurityauthentication.handler.SuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.annotation.Resource;
 
 /**
  * @Author:zdd
@@ -26,17 +30,28 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Resource
+    private FailureHandler failureHandler;
+
+    @Resource
+    private SuccessHandler successHandler;
+
     //配置过滤器
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         //开启HttpSecurity的配置
-        http.authorizeRequests()
-                //访问/admin/**模式的url必须具备admin的角色
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").access("hasAnyRole('ADMIN','USER')")
-                .anyRequest().authenticated().and()
-                //开启表单验证
-                .formLogin();
+        http.formLogin() // 表单登录
+                // http.httpBasic() // HTTP Basic
+                .loginPage("/authentication/require") // 登录跳转 URL
+                .loginProcessingUrl("/login") // 处理表单登录 URL
+                .successHandler(successHandler) // 处理登录成功
+                .failureHandler(failureHandler) // 处理登录失败
+                .and()
+                .authorizeRequests() // 授权配置
+                .antMatchers("/authentication/require", "/login.html").permitAll() // 登录跳转 URL 无需认证
+                .anyRequest()  // 所有请求
+                .authenticated(); // 都需要认证
+
 
         return http.build();
     }

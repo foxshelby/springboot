@@ -20,12 +20,12 @@ import org.springframework.stereotype.Service;
  * @since 2022-10-17
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService, UserDetailsService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        return null;
+//    }
 }

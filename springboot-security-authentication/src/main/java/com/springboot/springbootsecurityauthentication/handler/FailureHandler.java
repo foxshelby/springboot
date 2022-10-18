@@ -4,6 +4,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -16,10 +17,10 @@ import java.io.IOException;
  * @Date： 2022/10/18 12:26
  * 设置验证失败的处理方法
  */
+@Component
 public class FailureHandler implements AuthenticationFailureHandler {
 
-    @Resource
-    private RedirectStrategy redirectStrategy ;
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy() ;
 
     /**
      * @author zdd
