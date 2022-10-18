@@ -2,6 +2,7 @@ package com.springboot.springdatarediscache.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.springboot.springdatarediscache.entity.Code;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -25,6 +26,11 @@ public interface ICodeService extends IService<Code> {
     @Cacheable(value = "cacheManager",key = "#p0")
     Code getByCode(String code);
 
-    @CachePut
-    void addByCode(Code code);
+
+
+    @CachePut(value = "codePut",key = "#code")
+    void putCode(Code code);
+
+    @CacheEvict
+    void remove(String id);
 }

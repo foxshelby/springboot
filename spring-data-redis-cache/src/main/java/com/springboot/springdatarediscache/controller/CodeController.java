@@ -42,4 +42,18 @@ public class CodeController {
         System.out.println(o);
         return "ok";
     }
+
+    @GetMapping("/v1/put")
+    public String put(Code code) {
+        iCodeService.putCode(code);
+        return "ok";
+    }
+
+    @GetMapping("/v1/delete/{id}")
+    public String put(@PathVariable String id) {
+        iCodeService.remove(id);
+        return "ok";
+    }
+
+
 }

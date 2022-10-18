@@ -28,7 +28,13 @@ public class CodeServiceImpl extends ServiceImpl<CodeMapper, Code> implements IC
     }
 
     @Override
-    public void addByCode(Code code) {
+    public void putCode(Code code) {
         this.save(code);
     }
+
+    @Override
+    public void remove(String id) {
+        this.remove(id);
+    }
+
 }
