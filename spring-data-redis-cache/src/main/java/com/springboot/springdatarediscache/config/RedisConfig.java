@@ -84,6 +84,9 @@ public class RedisConfig {
 //                .cacheDefaults(redisCacheConfiguration)
 //                .build();
         //===============================================================
+        // 创建无锁的RedisCacheWriter
+        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
+
         RedisSerializer<String> redisSerializer = new StringRedisSerializer();
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         //解决查询缓存转换异常的问题
@@ -99,6 +102,7 @@ public class RedisConfig {
                 .disableCachingNullValues();
         RedisCacheManager cacheManager = RedisCacheManager.builder(redisConnectionFactory)
                 .cacheDefaults(config)
+                .cacheWriter(redisCacheWriter)//使用cachewriter 进行缓存的读写
                 .build();
         return cacheManager;
 //        return cacheManager;
