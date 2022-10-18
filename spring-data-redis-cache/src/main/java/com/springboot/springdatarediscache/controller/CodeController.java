@@ -38,7 +38,8 @@ public class CodeController {
 
     @GetMapping("/v1/add")
     public String add(Code code) {
-        Object o = redisTemplate.opsForValue().get("cacheManager::12");
+        Code o = (Code)redisTemplate.opsForValue().get("cacheManager::12");
+        System.out.println(o);
         return "ok";
     }
 }
