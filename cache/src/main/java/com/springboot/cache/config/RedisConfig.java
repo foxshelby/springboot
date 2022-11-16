@@ -76,11 +76,11 @@ public class RedisConfig {
     }
 
     /**
+     * @return org.springframework.cache.CacheManager
      * @author zdd
      * @createTime 2022/11/15 15:09
      * @desc 这里使用@Primary注解是为了不要使用默认的CacheManager对象
      * @Param [lettuceConnectionFactory]
-     * @return org.springframework.cache.CacheManager
      */
     @Primary
     public CacheManager cacheManager(LettuceConnectionFactory lettuceConnectionFactory) {
@@ -108,12 +108,12 @@ public class RedisConfig {
                 .disableCachingNullValues();
 
         //设置一个初始化的缓存空间set集合
-        Set<String> cacheNames = (Set)cacheProperties.getCacheNames();
+        Set<String> cacheNames = (Set) cacheProperties.getCacheNames();
 
         //对每个缓存空间应用不同的配置
         Map<String, RedisCacheConfiguration> configurationMap = new HashMap<>(3);
         for (String cacheName : cacheNames) {
-            configurationMap.put(cacheName,config1);
+            configurationMap.put(cacheName, config1);
         }
 
         return RedisCacheManager.builder(lettuceConnectionFactory)

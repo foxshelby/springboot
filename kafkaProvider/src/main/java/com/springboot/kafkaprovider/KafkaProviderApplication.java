@@ -22,7 +22,7 @@ public class KafkaProviderApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(KafkaProviderApplication.class, args);
         KafkaTemplate kafkaTemplate = run.getBean(KafkaTemplate.class);
-         kafkaTemplate.send("thing1", "测试kafkaTemplate");
+        kafkaTemplate.send("thing1", "测试kafkaTemplate");
     }
 
 }

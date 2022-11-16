@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CacheServiceImpl implements CacheService {
     int i = 0;
+
     @Override
     public Cache getObject(String s) {
         Cache cache = new Cache();

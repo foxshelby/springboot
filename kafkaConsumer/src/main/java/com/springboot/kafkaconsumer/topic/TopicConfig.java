@@ -19,11 +19,11 @@ import java.util.Map;
 public class TopicConfig {
 
     /**
+     * @return org.springframework.kafka.core.KafkaAdmin
      * @author zdd
      * @createTime 2022/11/16 10:17
      * @desc 只要在IOC容器中配置了这个类 就可以自行创建Topic
      * @Param []
-     * @return org.springframework.kafka.core.KafkaAdmin
      */
     @Bean
     public KafkaAdmin admin() {
