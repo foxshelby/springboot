@@ -13,11 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.RedisPassword;
-import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
-import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
@@ -45,12 +41,15 @@ public class RedisConfig {
     private LettuceConnectionFactory lettuceConnectionFactory;
 
 
+    /**
+     * @author zdd
+     * @createTime 2022/11/15 15:11
+     * @desc 这个对象里面的属性值就是配置文件中配置的值
+     * @Param
+     * @return
+     */
     @Resource
     private CacheProperties cacheProperties;
-
-
-
-
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
@@ -76,6 +75,13 @@ public class RedisConfig {
         return template;
     }
 
+    /**
+     * @author zdd
+     * @createTime 2022/11/15 15:09
+     * @desc 这里使用@Primary注解是为了不要使用默认的CacheManager对象
+     * @Param [lettuceConnectionFactory]
+     * @return org.springframework.cache.CacheManager
+     */
     @Primary
     public CacheManager cacheManager(LettuceConnectionFactory lettuceConnectionFactory) {
         RedisSerializer<String> redisSerializer = new StringRedisSerializer();
