@@ -18,11 +18,20 @@ import java.util.Map;
  */
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory implements BeanDefinitionRegistry {
 
+    //使用HashMap来保存实例名和实例的映射
     private Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
 
+    /**
+     * @author zdd
+     * @createTime 2022/11/16 13:55
+     * @desc 本质是将这个类 存储到HashMap中
+     * @Param [beanName, beanDefinition]
+     * @return void
+     */
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) {
         beanDefinitionMap.put(beanName, beanDefinition);
     }
+
 
     @Override
     public BeanDefinition getBeanDefinition(String beanName) throws BeansException {

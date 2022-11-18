@@ -15,6 +15,7 @@ import java.util.Map;
  */
 public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
 
+    //使用HashMap来保存实例名和实例的映射
     private Map<String, Object> singletonObjects = new HashMap<>();
 
     @Override

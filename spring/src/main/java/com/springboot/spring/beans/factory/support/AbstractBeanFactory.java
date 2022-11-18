@@ -13,6 +13,13 @@ import org.springframework.beans.BeansException;
  */
 public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory {
 
+    /**
+     * @author zdd
+     * @createTime 2022/11/16 13:56
+     * @desc 容器实例化的过程
+     * @Param [name]
+     * @return java.lang.Object
+     */
     public Object getBean(String name) throws BeansException {
         Object bean = getSingleton(name);
         if (bean != null) {
