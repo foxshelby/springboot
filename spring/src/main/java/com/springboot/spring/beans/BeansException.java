@@ -21,4 +21,6 @@ public class BeansException extends NestedRuntimeException {
     public BeansException(@Nullable String msg, @Nullable Throwable cause) {
         super(msg, cause);
     }
+
+
 }
